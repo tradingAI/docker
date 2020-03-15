@@ -52,7 +52,7 @@ RUN bash /tmp/bazel-2.1.0-installer-linux-x86_64.sh
 RUN echo "export PATH=$PATH:/usr/lib/go/bin" >> /root/.bashrc
 
 # clean
-RUN rm -rf /tmp/install.sh && rm -rf /tmp/Python-3.7.6*
+RUN rm -rf /tmp/bazel-2.1.0-installer-linux-x86_64.sh && rm -rf /tmp/Python-3.7.6*
 RUN  rm -rf /var/lib/apt/lists/*
 RUN rm -rf /root/.cache/pip
 
