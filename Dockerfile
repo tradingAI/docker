@@ -68,6 +68,7 @@ RUN update-alternatives --install /usr/bin/pip3 pip3 /usr/local/python3/bin/pip3
 RUN update-alternatives --config python3
 RUN update-alternatives --config pip3
 
+RUN echo "remove files"
 RUN rm -rf /tmp/*
 
 CMD ["source ~/.bashrc"]
