@@ -69,7 +69,6 @@ RUN update-alternatives --config python3
 RUN update-alternatives --config pip3
 
 RUN rm -rf /tmp/*
-RUN rm /usr/bin/lsb_release
 
 CMD ["source ~/.bashrc"]
 CMD ["bin/bash"]
