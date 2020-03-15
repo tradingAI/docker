@@ -20,7 +20,7 @@ RUN (apt-get update && apt-get install -y --no-install-recommends \
         openjdk-11-jre-headless)
         
 WORKDIR /tmp/
-RUN (wget https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz /tmp/)
+RUN (wget -P /tmp https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz)
 RUN tar -zxvf Python-3.7.6.tgz
 WORKDIR /tmp/Python-3.7.6
 RUN apt-get update -y
@@ -46,7 +46,7 @@ RUN (pip install -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors
 
 RUN (curl -L https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz | tar zx -C /usr/lib)
 
-RUN (wget https://github.com/bazelbuild/bazel/releases/download/2.1.0/bazel-2.1.0-installer-linux-x86_64.sh /tmp/)
+RUN (wget -P /tmp https://github.com/bazelbuild/bazel/releases/download/2.1.0/bazel-2.1.0-installer-linux-x86_64.sh)
 RUN (chmod +x /tmp/install.sh && \
     bash /tmp/install.sh)
 # RUN echo "bash /root/.bazel/bin/bazel-complete.bash" >> /root/.bashrc
