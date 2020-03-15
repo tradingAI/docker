@@ -47,9 +47,8 @@ RUN (pip install -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors
 RUN (curl -L https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz | tar zx -C /usr/lib)
 
 RUN (wget -P /tmp https://github.com/bazelbuild/bazel/releases/download/2.1.0/bazel-2.1.0-installer-linux-x86_64.sh)
-RUN sudo chmod +x /tmp/install.sh
+RUN (chmod +x /tmp/install.sh)
 RUN bash /tmp/install.sh
-# RUN echo "bash /root/.bazel/bin/bazel-complete.bash" >> /root/.bashrc
 RUN echo "export PATH=$PATH:/usr/lib/go/bin" >> /root/.bashrc
 
 # clean
