@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
 ENV BAZEL_VERSION 2.1.0
 ENV GOLANG_VERSION 1.13.8
