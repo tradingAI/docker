@@ -68,5 +68,9 @@ RUN update-alternatives --install /usr/bin/pip3 pip3 /usr/local/python3/bin/pip3
 RUN update-alternatives --config python3
 RUN update-alternatives --config pip3
 
+# dirs for bazel build
+RUN mkdir -p /root/cache/bazel
+RUN mkdir -p /root/output
+
 CMD ["source ~/.bashrc"]
 CMD ["bin/bash"]
