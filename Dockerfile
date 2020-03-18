@@ -72,5 +72,8 @@ RUN update-alternatives --config pip3
 RUN mkdir -p /root/cache/bazel
 RUN mkdir -p /root/output
 
+# https://github.com/pypa/pip/issues/4924
+RUN mv /usr/bin/lsb_release /usr/bin/lsb_release.bak
+
 CMD ["source ~/.bashrc"]
 CMD ["bin/bash"]
