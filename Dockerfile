@@ -75,6 +75,6 @@ RUN mkdir -p /root/output
 # https://github.com/pypa/pip/issues/4924
 RUN mv /usr/bin/lsb_release /usr/bin/lsb_release.bak
 
-RUN source /root/.bashrc
+RUN export PATH=$PATH:/usr/lib/go/bin
 
 CMD ["bin/bash"]
