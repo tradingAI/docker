@@ -6,9 +6,6 @@ ENV PYTHON_VERSION 3.7.6
 ENV PROTOBUF_VERSION=3.6.1
 ENV NODEJS_VERSION 12
 
-# 更换为阿里云境像
-RUN sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list
-
 RUN (apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         build-essential \
@@ -56,8 +53,7 @@ RUN update-alternatives --install /usr/bin/pip pip /usr/local/python3/bin/pip3 1
 RUN update-alternatives --config python
 RUN update-alternatives --config pip
 RUN pip install --upgrade pip
-RUN (pip install -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com grpcio numpy && \
-     touch /root/WORKSPACE)
+RUN (pip install grpcio numpy && touch /root/WORKSPACE)
 
 # Install Golang
 RUN (curl -L https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz | tar zx -C /usr/local)
@@ -108,11 +104,6 @@ rm -rf /var/lib/apt/lists/* && \
 rm -rf /root/.cache/pip
 
 WORKDIR /root
-
-RUN mkdir /root/.pip
-RUN echo "[global]" >> /root/.pip/pip.conf
-RUN echo "index-url=http://mirrors.aliyun.com/pypi/simple/" >> /root/.pip/pip.conf
-RUN echo "trusted-host=mirrors.aliyun.com" >> /root/.pip/pip.conf
 
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/python3/bin/python3 1
 RUN update-alternatives --install /usr/bin/pip3 pip3 /usr/local/python3/bin/pip3 1
