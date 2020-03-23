@@ -37,4 +37,4 @@ jobs:
         docker tag tradingai/bazel:gpu-latest registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:gpu-latest
         docker push registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:latest
         docker push registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:gpu-latest
-        docker logout
+        docker logout registry.cn-hangzhou.aliyuncs.com
