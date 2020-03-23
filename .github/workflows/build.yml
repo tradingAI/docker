@@ -27,3 +27,14 @@ jobs:
         docker push tradingai/bazel:latest
         docker push tradingai/bazel:gpu-latest
         docker logout
+
+    - name: ali docker login
+      run:  echo "${{ secrets.ALI_DOCKER_PASSWORD }}" | docker login -u ${{ secrets.ALI_DOCKER_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password-stdin
+
+    - name: ali docker push-logout
+      run: |
+        docker tag tradingai/bazel:latest registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:latest
+        docker tag tradingai/bazel:gpu-latest registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:gpu-latest
+        docker push registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:latest
+        docker push registry.cn-hangzhou.aliyuncs.com/tradingai/bazel:gpu-latest
+        docker logout
