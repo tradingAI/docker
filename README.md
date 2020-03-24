@@ -1,3 +1,4 @@
+![CI](https://github.com/tradingAI/docker/workflows/CI/badge.svg)
 ## ubuntu base images
 - [bazel.Dockerfile](bazel.Dockerfile): `tradingai/bazel:latest`
   - ubuntu
