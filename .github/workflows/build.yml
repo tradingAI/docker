@@ -3,8 +3,6 @@ name: CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -18,12 +16,33 @@ jobs:
 
     - name: Run build bazel.gpu
       run: make build_bazel_gpu
-    
+
     - name: docker login
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-    
+
     - name: docker push-logout
       run: |
         docker push tradingai/bazel:latest
         docker push tradingai/bazel:gpu-latest
+        docker logout
+
+  build_ml:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run build ml
+      run: make build_ml
+
+    - name: Run build ml.gpu
+      run: make build_ml_gpu
+
+    - name: docker login
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+    - name: docker push-logout
+      run: |
+        docker push tradingai/ml:latest
+        docker push tradingai/ml:gpu-latest
         docker logout
