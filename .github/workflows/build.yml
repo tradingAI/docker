@@ -26,13 +26,16 @@ jobs:
         docker push tradingai/bazel:gpu-latest
 
     - name: Run build ml
-      run: make build_ml
+      run: |
+        make build_ml
+        docker push tradingai/ml:latest
+        docker rmi tradingai/ml:latest
+        docker rmi tradingai/bazel:latest
 
     - name: Run build ml.gpu
-      run: make build_ml_gpu
-
-    - name: docker push-ml-logout
       run: |
-        docker push tradingai/ml:latest
+        make build_ml_gpu
         docker push tradingai/ml:gpu-latest
-        docker logout
+
+    - name: docker logout
+      run: docker logout
