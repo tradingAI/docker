@@ -1,4 +1,4 @@
-# last modified: 2023.10.15
+# last modified: 2023.11.21
 
 FROM ubuntu:22.04
 
@@ -19,7 +19,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 
 RUN apt-get install -y --no-install-recommends libbz2-dev libncurses5-dev libgdbm-dev libgdbm-compat-dev liblzma-dev libsqlite3-dev libssl-dev openssl tk-dev uuid-dev libreadline-dev
-RUN apt-get install -y --no-install-recommends libffi-dev
+RUN apt-get install -y --no-install-recommends libffi-dev libopenblas-dev gfortran git
 RUN ./configure --prefix=/usr/local/python3 && \
         make && \
         make install
@@ -36,10 +36,15 @@ RUN (wget -P /tmp https://github.com/bazelbuild/bazel/releases/download/$BAZEL_V
 RUN (chmod +x /tmp/bazel-$BAZEL_VERSION-installer-linux-x86_64.sh)
 RUN bash /tmp/bazel-$BAZEL_VERSION-installer-linux-x86_64.sh
 
+# Install openblas
+RUN (git clone https://github.com/xianyi/OpenBLAS.git)
+RUN (cd OpenBLAS && make FC=gfortran && make PREFIX=/usr/local install)
+
 # clean
 RUN rm -rf /tmp/* && \
 rm -rf /var/lib/apt/lists/* && \
-rm -rf /root/.cache/pip
+rm -rf /root/.cache/pip \
+rm -rf OpenBLAS
 
 WORKDIR /root
 
